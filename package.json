@@ -1,5 +1,5 @@
 {
-  "name": "pwn.js",
+  "name": "pwnlib",
   "version": "0.1.0",
   "description": "Node.js library for pwnable",
   "main": "dist/pwn.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pribess/pwn.js.git"
+    "url": "git+https://github.com/Pribess/pwnlib.git"
   },
   "keywords": [
     "pwn"
@@ -17,7 +17,7 @@
   "author": "Pribess",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Pribess/pwn.js/issues"
+    "url": "https://github.com/Pribess/pwnlib/issues"
   },
-  "homepage": "https://github.com/Pribess/pwn.js#readme"
+  "homepage": "https://github.com/Pribess/pwnlib#readme"
 }
