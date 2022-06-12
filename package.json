@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "Node.js library for pwnable",
   "main": "dist/pwn.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "test": "tsc; jest"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
