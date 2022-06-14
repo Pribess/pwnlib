@@ -1,6 +1,6 @@
 {
   "name": "pwnlib",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node.js library for pwnable",
   "main": "dist/pwn.js",
   "type": "module",
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Pribess/pwnlib/issues"
   },
-  "homepage": "https://github.com/Pribess/pwnlib#readme"
+  "homepage": "https://github.com/Pribess/pwnlib#readme",
+  "dependencies": {
+    "@types/node": "^17.0.42"
+  }
 }
