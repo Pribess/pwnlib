@@ -41,4 +41,4 @@ export default class ByteQueue {
     getSize(): number {
         return this.queue.byteLength;
     }
-  }
+}
