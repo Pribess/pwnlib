@@ -1,8 +1,9 @@
 {
   "name": "pwnlib",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Node.js library for pwnable",
   "main": "dist/pwn.js",
+  "types" : "dist/pwn.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc"
