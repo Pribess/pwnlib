@@ -6,10 +6,19 @@
 import Process from "./tunnels/process.js";
 import Remote from "./tunnels/remote.js";
 
+import { p16, p32 } from "./utilities/endian.js";
+
 export default {
     Process,
-    Remote
+    Remote,
+
+    p16,
+    p32
 };
+
+import Update  from "./etc/update.js";
+
+Update();
 
 process.on("uncaughtException", (err) => {
     console.log('Caught exception: ' + err);

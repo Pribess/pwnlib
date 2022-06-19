@@ -3,13 +3,12 @@
         pipe.ts
 */
 
-
 import net from "net";
 
 import EventEmitter from "events";
 import { Writable } from "stream";
-import ByteQueue from "../../utilities/bytequeue.js";
-import WaitFor from "../../utilities/waitfor.js";
+import ByteQueue from "../../etc/bytequeue.js";
+import WaitFor from "../../etc/waitfor.js";
 
 export default class Pipe {
     stream: Writable & net.Socket;
