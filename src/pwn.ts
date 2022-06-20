@@ -6,14 +6,15 @@
 import Process from "./tunnels/process.js";
 import Remote from "./tunnels/remote.js";
 
-import { p16, p32 } from "./utilities/endian.js";
+import { p16, p32, p64 } from "./utilities/endian.js";
 
 export default {
     Process,
     Remote,
 
     p16,
-    p32
+    p32,
+    p64
 };
 
 import Update  from "./etc/update.js";
