@@ -7,8 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && mocha --recursive",
-    "publish": "npm test && npm publish"
+    "test": "npm run build && mocha --recursive"
   },
   "files": [
     "dist"
