@@ -8,6 +8,8 @@ import Remote from "./tunnels/remote.js";
 
 import { p16, p32, p64, u16, u32, u64 } from "./utilities/endian.js";
 
+import ELF from "./files/elf.js";
+
 export default {
     Process,
     Remote,
@@ -17,10 +19,12 @@ export default {
     p64,
     u16,
     u32,
-    u64
+    u64,
+    
+    ELF
 };
 
-import Update  from "./etc/update.js";
+import Update from "./etc/update.js";
 
 Update();
 

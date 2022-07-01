@@ -11,7 +11,7 @@ import ByteQueue from "../../etc/bytequeue.js";
 import WaitFor from "../../etc/waitfor.js";
 
 export default class Pipe {
-    stream: Writable & net.Socket;
+    stream: Writable;
     buffer: ByteQueue;
     emitter: EventEmitter;
 

@@ -5,7 +5,7 @@
 
 import { Exception, Type } from "../etc/exception.js";
 
-export function p16(value: bigint): Uint8Array {
+export function p16(value: bigint): string {
     if (value < 0 || value > BigInt(65535)) {
         Exception(Type.Error, "p16 requires number between 0 and 65,535");
     }
@@ -14,10 +14,10 @@ export function p16(value: bigint): Uint8Array {
     buff.forEach((element, index, array): void => {
         array[index] = Number((value >> BigInt(index * 8)) & BigInt(0xFFn));
     });
-    return buff;
+    return String.fromCharCode.apply(null, Array.from(buff));
 }
 
-export function p32(value: bigint): Uint8Array {
+export function p32(value: bigint): string {
     if (value < 0 || value > BigInt(4294967295)) {
         Exception(Type.Error, "p32 requires number between 0 and 4,294,967,295");
     }
@@ -26,10 +26,10 @@ export function p32(value: bigint): Uint8Array {
     buff.forEach((element, index, array): void => {
         array[index] = Number((value >> BigInt(index * 8)) & BigInt(0xFF));
     });
-    return buff;
+    return String.fromCharCode.apply(null, Array.from(buff));
 }
 
-export function p64(value: bigint): Uint8Array {
+export function p64(value: bigint): string {
     if (value < 0 || value > BigInt(18446744073709551615n)) {
         Exception(Type.Error, "p64 requires number between 0 and 18,446,744,073,709,551,615");
     }
@@ -38,26 +38,44 @@ export function p64(value: bigint): Uint8Array {
     buff.forEach((element, index, array): void => {
         array[index] = Number((value >> BigInt(index * 8)) & BigInt(0xFFn));
     });
-    return buff;
+    return String.fromCharCode.apply(null, Array.from(buff));
 }
 
-export function u16(value: Uint8Array): bigint {
-    if (value.byteLength != 2) {
+export function u16(value: string): bigint {
+    if (value.length != 2) {
         Exception(Type.Error, "u16 requires a buffer of 2 bytes");
     }
-    return BigInt(new DataView(value.buffer).getUint16(0, true));
+    const size = 2;
+    let cnt = size;
+    const buff = new Uint8Array(size);
+    while(cnt--) {
+        buff[cnt] = Number(value.charCodeAt(cnt));
+    }
+    return BigInt(new DataView(buff.buffer).getUint16(0, true));
 }
 
-export function u32(value: Uint8Array): bigint {
-    if (value.byteLength != 4) {
+export function u32(value: string): bigint {
+    if (value.length != 4) {
         Exception(Type.Error, "u32 requires a buffer of 4 bytes");
     }
-    return BigInt(new DataView(value.buffer).getUint32(0, true));
+    const size = 4;
+    let cnt = size;
+    const buff = new Uint8Array(size);
+    while(cnt--) {
+        buff[cnt] = value.charCodeAt(cnt);
+    }
+    return BigInt(new DataView(buff.buffer).getUint32(0, true));
 }
 
-export function u64(value: Uint8Array): bigint {
-    if (value.byteLength != 8) {
+export function u64(value: string): bigint {
+    if (value.length != 8) {
         Exception(Type.Error, "u64 requires a buffer of 8 bytes");
     }
-    return new DataView(value.buffer).getBigUint64(0, true);
+    const size = 8;
+    let cnt = size;
+    const buff = new Uint8Array(size);
+    while(cnt--) {
+        buff[cnt] = value.charCodeAt(cnt);
+    }
+    return new DataView(buff.buffer).getBigUint64(0, true);
 }
