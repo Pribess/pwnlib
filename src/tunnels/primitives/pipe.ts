@@ -3,8 +3,6 @@
         pipe.ts
 */
 
-import net from "net";
-
 import EventEmitter from "events";
 import { Writable } from "stream";
 import ByteQueue from "../../etc/bytequeue.js";

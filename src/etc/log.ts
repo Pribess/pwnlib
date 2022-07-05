@@ -3,7 +3,7 @@
         exception.ts
 */
 
-import { bold, cyan, gray, red, yellow } from "colorette";
+import { bold, cyan, magenta, red, yellow, green } from "colorette";
 import process from "process";
 
 export enum Type {
@@ -14,14 +14,14 @@ export enum Type {
     Success
 };
 
-export function Exception(type: Type, err: string) {
+export function Log(type: Type, err: string) {
     switch (type) {
         case Type.Notify:
             err = `[${bold(cyan("*"))}] ${err}`
             console.log(err);
             break;
         case Type.Progress:
-            err = `[${bold(gray("~"))}] ${err}`
+            err = `[${bold(magenta("~"))}] ${err}`
             console.log(err);
             break;
         case Type.Error:
@@ -35,7 +35,7 @@ export function Exception(type: Type, err: string) {
             console.log(err);
             break;
         case Type.Success:
-            err = `[${bold(red("+"))}] ${err}`
+            err = `[${bold(green("+"))}] ${err}`
             console.log(err);
             break;
     }
