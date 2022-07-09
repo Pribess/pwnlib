@@ -4,6 +4,7 @@
 */
 
 import { ChildProcess, spawn } from "child_process";
+import which from "which";
 import { Log, Type } from "../etc/log.js";
 
 import Pipe from "./primitives/pipe.js";
@@ -11,11 +12,15 @@ import Pipe from "./primitives/pipe.js";
 export default class Process extends Pipe {
     process: ChildProcess;
 
-    constructor(path: string, args?: string[]) {
-        Log(Type.Progress, `starting local process '${path}'`);
-        const process: ChildProcess = spawn(path, args);
+    constructor(executable: string, args?: string[]) {
+        let process: ChildProcess = spawn(executable, args);
+        Log(Type.Progress, `starting local process '${which.sync(executable)}'`);
+        if (process.pid == undefined) {
+            Log(Type.Error, `'${which.sync(executable)}' is not executable`);
+        } else {
+            Log(Type.Success, `local process '${which.sync(executable)}' initialized successfully: pid ${process.pid}`)
+        }
         super(process.stdin);
-        Log(Type.Success, `local process '${path}' initialized successfully: pid ${process.pid}`)
 
         this.process = process;
         this.process.stdout?.on("data", (data) => {
