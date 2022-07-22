@@ -9,7 +9,11 @@ import { Log, Type } from "../etc/log.js";
 
 import Pipe from "./primitives/pipe.js";
 
-export default class Process extends Pipe {
+export function process(executable: string, args?: string[]): Process {
+    return new Process(executable, args);
+}
+
+export class Process extends Pipe {
     process: ChildProcess;
 
     constructor(executable: string, args?: string[]) {

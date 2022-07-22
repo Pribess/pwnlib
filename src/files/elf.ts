@@ -25,7 +25,11 @@ const machinecode: {
         0xF3: 'riscv'
     }
 
-export default class ELF {
+export function ELF(filepath: string): Elf {
+    return new Elf(filepath);
+}
+
+export class Elf {
     data: Uint8Array;
     view: DataView;
 

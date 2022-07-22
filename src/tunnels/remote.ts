@@ -8,7 +8,10 @@ import { Log, Type } from "../etc/log.js";
 
 import Pipe from "./primitives/pipe.js";
 
-export default class Remote extends Pipe {
+export function remote(host: string, port: number): Remote {
+    return new Remote(host, port);
+}
+export class Remote extends Pipe {
     host: string;
     port: number;
 

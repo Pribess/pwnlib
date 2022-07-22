@@ -3,28 +3,12 @@
         pwn.ts
 */
 
-import process from "./tunnels/process.js";
-import remote from "./tunnels/remote.js";
+export * from "./tunnels/process.js";
+export * from "./tunnels/remote.js";
 
-import { p16, p32, p64, u16, u32, u64 } from "./utilities/endian.js";
+export * from "./utilities/endian.js";
 
-import ELF from "./files/elf.js";
-
-
-export default {
-    process,
-    remote,
-
-    p16,
-    p32,
-    p64,
-    u16,
-    u32,
-    u64,
-    
-    ELF
-};
-
+export * from "./files/elf.js";
 
 import Update from "./etc/update.js";
 
