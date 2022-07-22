@@ -63,7 +63,7 @@ export default class ELF {
     }[];
 
     sheaders: {
-        sh_name:        bigint,
+        sh_name:        string,
         sh_type:        bigint,
         sh_flags:       bigint,
         sh_addr:        bigint,
@@ -149,10 +149,20 @@ export default class ELF {
 
         this.sheaders = [];
 
-        for (let idx: bigint = BigInt(0) ; idx < this.elf_header.e_shnum ; idx++) {
+        const address: number = Number(this.elf_header.e_shoff + (this.elf_header.e_shnum - 1n) * this.elf_header.e_shentsize);
+        const shrtrtab: bigint = this.bits == 32 ? BigInt(this.view.getUint32(address + 0x10, this.islittle)) : BigInt(this.view.getBigUint64(address + 0x18, this.islittle));
+
+        for (let idx: bigint = BigInt(1) ; idx < this.elf_header.e_shnum - 1n ; idx++) {
             let offset: number = Number(this.elf_header.e_shoff + idx * this.elf_header.e_shentsize);
+            const sh_name: bigint = this.bits == 32 ? BigInt(this.view.getUint32(offset, this.islittle)) : BigInt(this.view.getUint32(offset, this.islittle));
+            
+            let name: string = "";
+            for (let idx: bigint = BigInt(0) ; this.data[Number(shrtrtab + sh_name + idx)] != 0x00 ; idx++) {
+                name = name + String.fromCharCode(this.data[Number(shrtrtab + sh_name + idx)]);
+            }
+
             this.sheaders.push(this.bits == 32 ? {
-                sh_name:        BigInt(this.view.getUint32(offset, this.islittle)),
+                sh_name:        name,
                 sh_type:        BigInt(this.view.getUint32(offset + 0x04, this.islittle)),
                 sh_flags:       BigInt(this.view.getUint32(offset + 0x08, this.islittle)),
                 sh_addr:        BigInt(this.view.getUint32(offset + 0x0C, this.islittle)),
@@ -163,7 +173,7 @@ export default class ELF {
                 sh_addralign:   BigInt(this.view.getUint32(offset + 0x20, this.islittle)),
                 sh_entsize:     BigInt(this.view.getUint32(offset + 0x24, this.islittle))
             } : {
-                sh_name:        BigInt(this.view.getUint32(offset, this.islittle)),
+                sh_name:        name,
                 sh_type:        BigInt(this.view.getUint32(offset + 0x04, this.islittle)),
                 sh_flags:       BigInt(this.view.getBigUint64(offset + 0x08, this.islittle)),
                 sh_addr:        BigInt(this.view.getBigUint64(offset + 0x10, this.islittle)),

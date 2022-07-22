@@ -34,6 +34,6 @@ Update();
 import Process from "process";
 
 Process.on("uncaughtException", (err) => {
-    console.log('Caught exception: ' + err);
+    console.log('Caught exception: ' + err, err.stack);
     Process.exit(1);
 });
