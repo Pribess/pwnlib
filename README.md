@@ -20,11 +20,11 @@ pwn.stdio(r.stream);
 in typescript
 
 ```typescript
-import pwn from "pwnlib";
+import * as pwn from "pwnlib";
 
-const r = pwn.remote("example.com", 12345);
+const r: pwn.Remote = pwn.remote("example.com", 12345);
 
-const sh = pwn.shcraft()
+const sh: pwn.ShellCode = pwn.shcraft()
             .sh();
 
 r.send(sh.bin);
