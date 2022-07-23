@@ -24,7 +24,7 @@ import * as pwn from "pwnlib";
 
 const r: pwn.Remote = pwn.remote("example.com", 12345);
 
-const sh: pwn.ShellCode = pwn.shcraft()
+const sh: pwn.ShellCraft = pwn.shcraft()
             .sh();
 
 r.send(sh.bin);
