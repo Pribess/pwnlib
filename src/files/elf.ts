@@ -80,6 +80,17 @@ export class Elf {
     }[];
 
     constructor(filepath: string) {
+        if (!fs.existsSync(filepath)) {
+            Log(Type.Error, `no such file or directory: '${filepath}'`);
+        } else if (!fs.lstatSync(filepath).isFile() ) {
+            Log(Type.Error, `is not a file: '${filepath}'`);
+        }
+        try {
+            fs.accessSync(filepath, fs.constants.R_OK);
+        } catch (err) {
+            Log(Type.Error, `permission denied: '${filepath}'`);
+        }
+
         this.data = fs.readFileSync(path.resolve(filepath));
         path.resolve()
         this.view = new DataView(this.data.buffer);
@@ -210,6 +221,12 @@ export class Elf {
             } else {
                 return false;
             }
-        }) ? (true ? green("Full RELRO") : yellow("Partial RELRO")) : red("No RELRO");
+        }) ? (this.sheaders.some((element) => {
+            if (element.sh_name == ".plt.got") {
+                return true;
+            } else {
+                return false;
+            }
+        }) ? green("Full RELRO") : yellow("Partial RELRO")) : red("No RELRO");
     }
 };
