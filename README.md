@@ -16,17 +16,3 @@ const sh = pwn.shcraft()
 r.send(sh.bin);
 pwn.stdio(r.stream);
 ```
-
-in typescript
-
-```typescript
-import * as pwn from "pwnlib";
-
-const r: pwn.Remote = pwn.remote("example.com", 12345);
-
-const sh: pwn.ShellCraft = pwn.shcraft()
-            .sh();
-
-r.send(sh.bin);
-pwn.stdio(r.stream);
-```
